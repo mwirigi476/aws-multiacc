@@ -2,26 +2,35 @@
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "DenyEC2Terminate",
+      "Sid": "EnforceCBKProductionEC2TerminationProtection",
       "Effect": "Deny",
-      "Action": ["ec2:TerminateInstances"],
+      "Action": [
+        "ec2:TerminateInstances"
+      ],
       "Resource": "*",
       "Condition": {
         "StringNotEquals": {
           "aws:PrincipalTag/EmergencyAccess": "true"
+        },
+        "StringEquals": {
+          "aws:PrincipalAccount": "803871049728"
         }
       }
     },
     {
-      "Sid": "DenyCloudTrailTampering",
+      "Sid": "EnforceImmutableAuditTrailLogging",
       "Effect": "Deny",
       "Action": [
         "cloudtrail:StopLogging",
         "cloudtrail:DeleteTrail",
         "cloudtrail:UpdateTrail",
-        "cloudtrail:PutEventSelectors"
+        "cloudtrail:PutEventSelectors",
+        "cloudtrail:RemoveTags",
+        "cloudtrail:AddTags"
       ],
-      "Resource": "*"
+      "Resource": [
+        "arn:aws:cloudtrail:us-east-1:803871049728:trail/org-core-audit-trail"
+      ]
     }
   ]
 }
