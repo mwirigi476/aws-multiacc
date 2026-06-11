@@ -29,7 +29,7 @@
         "cloudtrail:AddTags"
       ],
       "Resource": [
-        "arn:aws:cloudtrail:us-east-1:803871049728:trail/org-core-audit-trail"
+        "arn:aws:cloudtrail:us-east-1:093796422314:trail/org-core-audit-trail"
       ]
     }
   ]
